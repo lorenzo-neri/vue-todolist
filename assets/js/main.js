@@ -21,7 +21,9 @@ createApp({
             newTask: '',
 
             tasks: [
-                { text: 'Fare Spesa', done: true }
+                { text: 'Fare Spesa', done: true },
+                { text: 'Vedere Star Wars', done: false }, //non si vede mai abbastanza
+                { text: 'Pulire casa', done: true },
             ],
 
             taskCheck: false
