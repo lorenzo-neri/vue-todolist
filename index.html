@@ -43,8 +43,9 @@
                 <li
                     class="list-group-item d-flex justify-content-between"
                     v-for="(task, i) in tasks" :key="i">
-                    <span :class="{'done_task': task.done}"
-                        @click="toggleDone(i)">{{ task.text }}</span>
+                    <span :class="{'done_task': task.done}">{{ task.text }}</span>
+
+                    <input @click="toggleDone(i)" type="checkbox">
 
                     <!-- @click="removeTask(i)" esegue removeTask(i) AL CLICK PRENDENDO IL PARAMETRO i DALLA DIRETTIVA v-for-->
                     <i class="fa-solid fa-circle-minus text-danger"
