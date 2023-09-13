@@ -21,7 +21,7 @@ createApp({
             newTask: '',
 
             tasks: [
-                {text: 'Fare Spesa', done: true}
+                { text: 'Fare Spesa', done: true }
             ],
 
             taskCheck: false
@@ -52,7 +52,7 @@ createApp({
                 //se newTask è una stringa vuota, setto su true taskCheck (mostrando il mess di errore)
                 this.taskCheck = true;
             }
-            
+
         },
 
         removeTask(i) {
@@ -60,7 +60,7 @@ createApp({
             this.tasks.splice(i, 1);
             console.log(this.tasks);
         },
-        
+
         toggleDone(i) {
             this.tasks[i].done = !this.tasks[i].done;
         }
