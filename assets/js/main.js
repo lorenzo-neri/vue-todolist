@@ -18,11 +18,51 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
-            
+            newTask: '',
+
+            tasks: [
+                {text: 'Fare Spesa', done: true}
+            ],
+
+            taskCheck: false
+
         }
     },
 
     methods: {
+        addTask() {
 
+            //al click controllo se l'input (non) è una stringa
+            if (this.newTask != "") {
+
+                const newTodo = {
+                    text: this.newTask,
+                    done: false
+                };
+                this.tasks.push(newTodo);
+
+                //svuoto l'input
+                this.taskInput = "";
+
+                //SETTO LA VARIABILE DI CONTROLLO DELLA LUNGHEZZA DEL TASK SU FALSE PER CANCELLARE UN EVENTUALE MESSAGGIO DI ERRORE IN PAGINA
+                this.taskCheck = false;
+                console.log(this.tasks);
+
+            } else {
+                //se newTask è una stringa vuota, setto su true taskCheck (mostrando il mess di errore)
+                this.taskCheck = true;
+            }
+            
+        },
+
+        removeTask(i) {
+            //rimuove alla posizione i 1 elemento
+            this.tasks.splice(i, 1);
+            console.log(this.tasks);
+        },
+        
+        toggleDone(i) {
+            this.tasks[i].done = !this.tasks[i].done;
+        }
     }
 }).mount('#app')

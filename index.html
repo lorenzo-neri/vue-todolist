@@ -11,18 +11,66 @@
             rel="stylesheet"
             integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
             crossorigin="anonymous">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+            integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer">
+
     </head>
     <body>
-        
+
         <h1 class="text-center">To Do List</h1>
 
         <div class="text-center" id="app">
-            <input v-model="userText" type="text">
 
-            <div v-model="userText"></div>
+            <!-- v-on:keyup.enter="addTask()" esegue addTask() quando ENTER viene premuto -->
+            <input type="text" v-model="newTask"
+                v-on:keyup.enter="addTask()"
+                placeholder="Inserisci una nuova task"
+                class="form-control">
+
+            <!-- @click="addTask()" esegue addTask() al click -->
+            <button class="btn btn-outline-secondary"
+                type="button" @click="addTask()">Aggiungi</button>
+
+            <!-- v-if controlla se taskCheck è true, se lo è mostra il msg di error -->
+            <h5 class="text-danger text-center"
+                v-if="taskCheck">ATTENZIONE, SI PREGA DI INSERIRE UNA TASK</h5>
+
+            <ul v-if="tasks.length > 0">
+
+                <!-- cicla e inserisce {{task}} -->
+                <li
+                    class="list-group-item d-flex justify-content-between"
+                    v-for="(task, i) in tasks" :key="i">
+                    <span :class="{'done_task': task.done}" @click="toggleDone(i)">{{ task.text }}</span>
+
+                    <!-- @click="removeTask(i)" esegue removeTask(i) AL CLICK PRENDENDO IL PARAMETRO i DALLA DIRETTIVA v-for-->
+                    <i class="fa-solid fa-circle-minus text-danger"
+                        @click="removeTask(i)"></i>
+
+                </li>
+
+            </ul>
+
+            <!-- se tasks è vuoto -->
+            <h5 class="pt-5" v-else>NON CI SONO TASK</h5>
+
+            <!-- <input type="text" v-model="newTask"
+                placeholder="Inserisci una nuovo task">
+            <button @click="addTask()">Aggiungi</button>
+
+            <h4 class="text-danger mt-2"
+                v-if="taskCheck">Attenzione,
+                si prega di inserire una task!</h4>
+
+            <div v-for="(task, i) in tasks">
+                <div>{{task}}</div>
+            </div> -->
 
         </div>
-        
+        <!-- /#app -->
+
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     </body>
 </html>
