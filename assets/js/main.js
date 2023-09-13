@@ -42,7 +42,7 @@ createApp({
                 this.tasks.push(newTodo);
 
                 //svuoto l'input
-                this.taskInput = "";
+                this.newTask = "";
 
                 //SETTO LA VARIABILE DI CONTROLLO DELLA LUNGHEZZA DEL TASK SU FALSE PER CANCELLARE UN EVENTUALE MESSAGGIO DI ERRORE IN PAGINA
                 this.taskCheck = false;
