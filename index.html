@@ -21,43 +21,50 @@
 
         <h1 class="text-center">To Do List</h1>
 
-        <div class="text-center" id="app">
+        <div class="text-center container" id="app">
 
-            <!-- v-on:keyup.enter="addTask()" esegue addTask() quando ENTER viene premuto -->
-            <input type="text" v-model="newTask"
-                v-on:keyup.enter="addTask()"
-                placeholder="Inserisci una nuova task"
-                class="form-control">
-
-            <!-- @click="addTask()" esegue addTask() al click -->
-            <button class="btn btn-outline-secondary"
-                type="button" @click="addTask()">Aggiungi</button>
-
+            <div class="row m-3">
+                <div class="col-10">
+                    <!-- v-on:keyup.enter="addTask()" esegue addTask() quando ENTER viene premuto -->
+                    <input type="text" v-model="newTask"
+                        v-on:keyup.enter="addTask()"
+                        placeholder="Inserisci una nuova task"
+                        class="form-control">
+                </div>
+                <div class="col-2">
+                    <!-- @click="addTask()" esegue addTask() al click -->
+                    <button class="btn btn-outline-secondary"
+                        type="button" @click="addTask()">Aggiungi</button>
+                </div>
+            </div>
             <!-- v-if controlla se taskCheck è true, se lo è mostra il msg di error -->
             <h5 class="text-danger text-center"
                 v-if="taskCheck">ATTENZIONE, SI PREGA DI INSERIRE UNA TASK</h5>
+            <div class="row">
+                <div class="col">
+                    <ul v-if="tasks.length > 0">
 
-            <ul v-if="tasks.length > 0">
+                        <!-- cicla e inserisce {{task}} -->
+                        <li
+                            class="list-group-item d-flex justify-content-between"
+                            v-for="(task, i) in tasks" :key="i">
+                            <span @click="toggleDone(i)" :class="{'done_task': task.done}">{{ task.text
+                                }}</span>
 
-                <!-- cicla e inserisce {{task}} -->
-                <li
-                    class="list-group-item d-flex justify-content-between"
-                    v-for="(task, i) in tasks" :key="i">
-                    <span :class="{'done_task': task.done}">{{ task.text }}</span>
+                            <!-- <input  type="checkbox"> -->
 
-                    <input @click="toggleDone(i)" type="checkbox">
+                            <!-- @click="removeTask(i)" esegue removeTask(i) AL CLICK PRENDENDO IL PARAMETRO i DALLA DIRETTIVA v-for-->
+                            <i class="fa-solid fa-circle-minus text-danger"
+                                @click="removeTask(i)"></i>
 
-                    <!-- @click="removeTask(i)" esegue removeTask(i) AL CLICK PRENDENDO IL PARAMETRO i DALLA DIRETTIVA v-for-->
-                    <i class="fa-solid fa-circle-minus text-danger"
-                        @click="removeTask(i)"></i>
+                        </li>
 
-                </li>
+                    </ul>
 
-            </ul>
-
-            <!-- se tasks è vuoto -->
-            <h5 class="pt-5" v-else>NON CI SONO TASK</h5>
-
+                    <!-- se tasks è vuoto -->
+                    <h5 class="pt-5" v-else>NON CI SONO TASK</h5>
+                </div>
+            </div>
             <!-- <input type="text" v-model="newTask"
                 placeholder="Inserisci una nuovo task">
             <button @click="addTask()">Aggiungi</button>
